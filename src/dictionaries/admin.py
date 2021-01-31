@@ -3,7 +3,7 @@ from .models import Author, Genre, Publisher, BookSeries
 
 # Register your models here.
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'surname', 'patronymic', 'country','birthdate', 'biography')
+    list_display = ('surname', 'name', 'patronymic', 'country','birthdate', 'biography')
 
 admin.site.register(Author, AuthorAdmin)
 
