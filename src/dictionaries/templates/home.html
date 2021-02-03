@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Первый внесенный автор:</h1>
+
+    <table width = 100% border=1>
+        <tr>
+            <th width = 20%>ФИО</th>
+            <th width = 10%>Дата рождения</th>
+            <th width = 10%>Страна</th>
+            <th width = 60%>Биография</th>
+        </tr>
+        {% block info %}
+        <tr>
+            <th>{{author.surname}} {{author.name}} {{author.patronymic}}</td>
+            <td>{{author.birthdate}}</td>
+            <td>{{author.country}}</td>
+            <td>{{author.biography}}</td>
+        </tr>
+        {% endblock %}
+    </table>
+   
+</body>
+</html>
