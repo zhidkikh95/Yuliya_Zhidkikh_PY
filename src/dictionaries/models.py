@@ -8,7 +8,7 @@ class Author(models.Model):
     patronymic = models.CharField("Отчество", blank=True, null=True, max_length=80)
     country = models.CharField("Страна", blank=True, null=True, max_length=80)
     biography = models.TextField("Биография", blank=True, null=True)
-    birthdate = models.DateField("Дата рождения", default=datetime.date(1970,1,1),  blank=True, null=True)
+    birthdate = models.DateField("Дата рождения", blank=True, null=True)
 
     def __str__(self):
         return self.surname

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+</head>
+<body align=center>
+    <h1>Список авторов:</h1>
+    <table align=center width=70% border=1>
+        <tr>
+            <th>#</th>
+            <th>ФИО</th>
+            <th width=20%>Дата рождения</th>
+            <th width=20%>Страна</th>
+            <th>Действия</th>
+        </tr>
+        {% for author in object_list %}
+        <tr align=left >
+            <td>{{author.pk}}</td>
+            <td><a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a></td>
+            <td>{{author.birthdate|default:""}}</td>
+            <td>{{author.country|default:""}}</td>
+            <td><a href="{% url 'author-delete' author.pk %}">Удалить</a> <a href="{% url 'author-update' author.pk %}">Обновить</a></td>    
+        </tr>
+        {% endfor %}
+    </table>
+<p><a href="{% url 'author-create'%}">Добавить автора</a></p>
+</body>
+</html>

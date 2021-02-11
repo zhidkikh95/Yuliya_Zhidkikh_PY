@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author</title>
+</head>
+<body>
+    <h1 align=center><i>{{object.surname}} {{object.name}} {{object.patronymic|default:""}}</i></h1>
+    <table width=70% align=center border=1>
+        <tr >
+            <th width=10% align=left>#</th>
+            <td>{{object.pk}}</td>
+        </tr>
+        <tr>
+            <th align=left>Дата рождения</th>
+            <td>{{object.birthdate|default:""}}</td>
+        </tr>
+        <tr>
+            <th align=left>Страна</th>
+            <td>{{object.country|default:""}}</td>
+        </td>
+        <tr>
+            <th align=left>Биография</th>
+            <td>{{object.biography|default:""}}</td>
+        </tr>
+        </table>
+    <p align=center><a href='{% url 'author-list' %}'>Вернуться к спику авторов</a></p>
+</body>
+</html>

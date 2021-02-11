@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete</title>
+</head>
+<body>
+    <h2>Вы уверены, что хотите удалить <span style="color:red">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</span> из списка автора ?</h2><br>
+    <form method="POST">
+    {% csrf_token %}
+    <button>Да</button>
+    <form>
+    </h1>
+</body>
+</html>
