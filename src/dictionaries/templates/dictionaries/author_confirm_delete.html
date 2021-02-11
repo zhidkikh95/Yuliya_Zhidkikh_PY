@@ -7,7 +7,7 @@
     <title>Delete</title>
 </head>
 <body>
-    <h2>Вы уверены, что хотите удалить <span style="color:red">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</span> из списка автора ?</h2><br>
+    <h2>Вы уверены, что хотите удалить <span style="color:red">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</span> из списка авторов?</h2><br>
     <form method="POST">
     {% csrf_token %}
     <button>Да</button>
