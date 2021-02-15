@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author</title>
-</head>
-<body>
-    <h1 align=center><i>{{object.surname}} {{object.name}} {{object.patronymic|default:""}}</i></h1>
-    <table width=70% align=center border=1>
+{% extends "base.html" %}
+{% block title%} Author {% endblock title %}
+{% block main_content %}
+    <h1>{{object.surname}} {{object.name}} {{object.patronymic|default:""}}</h1>
+    <table width=70% class="table table-striped">
         <tr >
             <th width=10% align=left>#</th>
             <td>{{object.pk}}</td>
@@ -26,6 +20,5 @@
             <td>{{object.biography|default:""}}</td>
         </tr>
         </table>
-    <p align=center><a href="{% url 'author-list' %}">Вернуться к спику авторов</a></p>
-</body>
-</html>
+    <p align=center><a href="{% url 'author-list' %}" class="btn btn-info" >Вернуться к спику авторов</a></p>
+{% endblock main_content  %}

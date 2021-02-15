@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} Create {% endblock title %}
+{% block main_content %}
     <h1>Добавление автора:</h1>
     <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button>Готово</button>
+    {{ form|crispy }}
+    <button align=center class="btn btn-success">Готово</button>
     </form>
-    </h1>
-</body>
-</html>
+{% endblock main_content  %}

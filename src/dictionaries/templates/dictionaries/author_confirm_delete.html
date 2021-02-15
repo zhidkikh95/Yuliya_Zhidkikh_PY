@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title%} Delete {% endblock title %}
+
+{% block main_content %}
     <h2>Вы уверены, что хотите удалить <span style="color:red">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</span> из списка авторов?</h2><br>
     <form method="POST">
     {% csrf_token %}
-    <button>Да</button>
+    <button class="btn btn-danger">Да</button>
     </form>
-    </h1>
-</body>
-</html>
+{% endblock main_content  %}
