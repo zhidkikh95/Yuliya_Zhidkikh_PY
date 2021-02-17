@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title%} Добавление нового автора {% endblock title %}
+{% block title%} Добавление нового жанра {% endblock title %}
 {% block main_content %}
-    <h1>Добавление автора:</h1>
+    <h1>Добавление жанра:</h1>
     <form method="POST">
     {% csrf_token %}
     {{ form|crispy }}

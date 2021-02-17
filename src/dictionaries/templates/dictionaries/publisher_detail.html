@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title%} Информация об издательстве {% endblock title %}
+{% block main_content %}
+    <h1>{{object.publisher_name}}</h1>
+    <table class="table table-striped">
+        <tr >
+            <td width=10% align=left>#</td>
+            <td>{{object.pk}}</td>
+        </tr>
+        <tr>
+            <td colspan=2 align=justify>{{object.publisher_description}}</td>
+        </tr>
+        </table>
+    <p align=center><a href="{% url 'publisher-list' %}" class="btn btn-info" >Вернуться к спику издательств</a></p>
+{% endblock main_content  %}

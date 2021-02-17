@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title%} Удаление издательства из списка {% endblock title %}
+
+{% block main_content %}
+    <h2>Вы уверены, что хотите удалить <span style="color:red">{{ object.publisher_name}}</span> из списка издательств?</h2><br>
+    <form method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">Да</button>
+    </form>
+{% endblock main_content  %}
