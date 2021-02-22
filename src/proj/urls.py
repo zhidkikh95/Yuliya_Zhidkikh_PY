@@ -18,7 +18,8 @@ from django.urls import path
 from dictionaries import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.AuthorList.as_view(), name='author-list'),
+    path('', views.home_page, name='home-page'),
+    path('authors', views.AuthorList.as_view(), name='author-list'),
     path('author/<int:pk>', views.AuthorDetail.as_view(), name='author-details'),
     path('author-delete/<int:pk>', views.AuthorDelete.as_view(), name='author-delete'),
     path('author-create/', views.AuthorCreate.as_view(), name='author-create'),

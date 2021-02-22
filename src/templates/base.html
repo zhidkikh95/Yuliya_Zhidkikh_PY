@@ -1,5 +1,4 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -56,17 +55,35 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'author-list' %}">Авторы<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Каталог<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'genre-list' %}">Жанры<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Корзина<span class="sr-only">(current)</span></a>
       </li>
+
+      {% if user.is_staff %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Словари</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{% url 'author-list' %}"> Авторы</a>
+          <a class="dropdown-item"  href="{% url 'genre-list' %}">Жанры</a>
+          <a class="dropdown-item" href="{% url 'publisher-list' %}">Издательства</a>
+          <a class="dropdown-item"  href="{% url 'book-series-list' %}">Серии книг  </a>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+    <ul class="navbar-nav col-auto">
+    {% if user.is_authenticated %}
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'publisher-list' %}">Издательства<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Мой профиль<span class="sr-only">(current)</span></a>
       </li>
+    {% endif %}
+    {% if user.is_anonymous %}
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'book-series-list' %}">Серии книг<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Войти<span class="sr-only">(current)</span></a>
       </li>
+    {% endif %}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
