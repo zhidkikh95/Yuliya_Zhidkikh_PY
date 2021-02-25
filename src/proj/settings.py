@@ -25,8 +25,8 @@ SECRET_KEY = '=vemd26rgufg+ylfevw0fqk-f)ej0k)fmz8gb(yz!!1&(e7sv^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yuliyazhidkikh.pythonanywhere.com']
-
+ALLOWED_HOSTS = []
+# 'yuliyazhidkikh.pythonanywhere.com'
 
 
 # Application definition
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'dictionaries'  
+    'dictionaries',
+    'books',
+    'accounts' 
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/yuliyazhidkikh/Yuliya_Zhidkikh_PY/static' 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL='/'

@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from dictionaries import views
+from dictionaries import views 
+from books import views as bookviews
+from accounts import views as loginviews
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_page, name='home-page'),
+    path('', bookviews.BookList.as_view(), name='book-list'),
     path('authors', views.AuthorList.as_view(), name='author-list'),
     path('author/<int:pk>', views.AuthorDetail.as_view(), name='author-details'),
     path('author-delete/<int:pk>', views.AuthorDelete.as_view(), name='author-delete'),
@@ -36,5 +38,6 @@ urlpatterns = [
     path('book-series', views.BookSeriesList.as_view(), name='book-series-list'),
     path('book-series-delete/<int:pk>', views.BookSeriesDelete.as_view(), name='book-series-delete'),
     path('book-series-create/', views.BookSeriesCreate.as_view(), name='book-series-create'),
-    path('book-series-update/<int:pk>', views.BookSeriesUpdate.as_view(), name='book-series-update')
+    path('book-series-update/<int:pk>', views.BookSeriesUpdate.as_view(), name='book-series-update'),
+    path('accounts/login', loginviews.MyLoginView.as_view(), name='login')
 ]

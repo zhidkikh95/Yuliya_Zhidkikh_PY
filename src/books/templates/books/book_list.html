@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title%} Книги {% endblock title %}
+
+
+{% block main_content %}
+  
+  <h1>Все книги:</h1>
+    <table class="table table-striped" width=70%>
+        <tr>
+            <th>Название книги</th>
+            <th>Цена</th>
+            <th>Автор</th>
+            <th>Серия</th>
+            <th>Жанр</th>
+            <th>Год издания</th>
+            <th>Издательство</th>  
+            <th>Количество книг в наличии</th>
+            <th>Рейтинг</th>            
+        </tr>
+        {% for book in object_list %}
+        <tr>
+            <td>{{book.name}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.series}}</td>
+            <td>{{book.genre}}</td>
+            <td>{{book.published_date}}</td>
+            <td>{{book.available_number}}</td>
+            <td>{{book.rate}}</td>            
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock main_content  %}
