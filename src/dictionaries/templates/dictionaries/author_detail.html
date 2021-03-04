@@ -3,10 +3,10 @@
 {% block main_content %}
     <h1>{{object.surname}} {{object.name}} {{object.patronymic|default:""}}</h1>
     <table width=70% class="table table-striped">
-        <tr >
+        {% if  user.is_staff %}<tr >
             <th width=10% align=left>#</th>
             <td>{{object.pk}}</td>
-        </tr>
+        </tr>{% endif %}
         <tr>
             <th align=left>Дата рождения</th>
             <td>{{object.birthdate|default:""}}</td>
@@ -20,5 +20,5 @@
             <td>{{object.biography|default:""}}</td>
         </tr>
         </table>
-    <p align=center><a href="{% url 'author-list' %}" class="btn btn-info" >Вернуться к спику авторов</a></p>
+   {% if user.is_staff %}<p align=center><a href="{% url 'author-list' %}" class="btn btn-info" >К спику авторов</a></p>{% endif %} 
 {% endblock main_content  %}

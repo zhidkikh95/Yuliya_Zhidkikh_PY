@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block title%} Книги {% endblock title %}
-
-
 {% block main_content %}
   
   <h1>Все книги:</h1>
@@ -19,16 +17,20 @@
         </tr>
         {% for book in object_list %}
         <tr>
-            <td>{{book.name}}</td>
+            <td><a href="{% url 'book-details' book.pk %}">{{book.name}}</a></td>
             <td>{{book.price}}</td>
-            <td>{{book.author}}</td>
+            <td>{% for author in object.author.all %}{{author.surname}} {{author.name}} {{author.patronymic|default:""}}{% endfor %}</td>
             <td>{{book.series}}</td>
-            <td>{{book.genre}}</td>
-            <td>{{book.published_date}}</td>
+            <td>{% for gernre in objects.genre.all  %}{{book.genre}}{% endfor %}</td>
+            <td>{{book.published_year}}</td>
+            <td>{{book.publisher}}</td>
             <td>{{book.available_number}}</td>
             <td>{{book.rate}}</td>            
         </tr>
         {% endfor %}
     </table>
+    {% if user.is_staff%}
+    <p align=center ><a href="{% url 'book-create'%}" class="btn btn-success">Добавить книгу</a></p>
+    {% endif %}
 
 {% endblock main_content  %}

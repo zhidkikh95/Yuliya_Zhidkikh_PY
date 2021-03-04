@@ -25,7 +25,7 @@ SECRET_KEY = '=vemd26rgufg+ylfevw0fqk-f)ej0k)fmz8gb(yz!!1&(e7sv^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yuliyazhidkikh.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'yuliyazhidkikh.pythonanywhere.com']
 
 
 
@@ -125,4 +125,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/yuliyazhidkikh/Yuliya_Zhidkikh_PY/static' 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL ='/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

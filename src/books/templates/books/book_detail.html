@@ -1,0 +1,75 @@
+    {% extends "base.html" %}
+    {% block title%} "{{object.name}}" {% endblock title %}
+    {% block main_content %}
+        <h1>{{object.name}}</h1>
+        <p>{% for author in object.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %}</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{object.book_picture.url}}" alt="{{object.name}}"height="360">
+                        <div class="card-body">
+                            <p class="h3">{{object.price}} руб.<br> 
+                                <p class="card-text">{% if object.available_number > 10  %} В наличии {% elif object.available_number == 0  %} {% elif object.available_number < 11 %} Скоро закончится{% endif %}</p>  
+                                {% if object.available_number > 0 %}
+                                <div align=center>
+                                <button class="btn btn-primary"  type="button"><i class="fas fa-shopping-cart"></i>  Положить в корзину</button>
+                                </div>
+                                {% elif object.available_number == 0 %}
+                                <div align=center>
+                                    <button class="btn btn-primary"  type="button" disabled><i class="fas fa-shopping-cart"></i>  Нет в наличии</button>
+                                </div>
+                                {% endif %}
+                            </p>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <p class='h5'>Вся информация:</p>
+                    <table class="table table-borderless">
+                    <tr>
+                    <td width=40%>Жанр</td>
+                    <td>{% for genre in object.genre.all %}{{genre.genre_name}}{% endfor %}</td>
+                    </tr>
+                    <tr>
+                    <td>Серия</td>
+                    <td>{{object.series}}</td>
+                    </tr>
+                    <tr>
+                    <td>Издание</td>
+                    <td>{{object.publisher}}</td>
+                    </tr>
+                    <td>Год издания</td>
+                    <td>{{object.published_year|default:""}}</td>
+                    </tr>
+                    <tr>
+                    <td>Страниц</td>
+                    <td>{{object.page_numbers|default:""}}</td>
+                    </tr>
+                    <tr>
+                    <td>Вес, г.</td>
+                    <td>{{object.weight|default:""}}</td>
+                    </tr>
+                    <tr>
+                    <td>Переплет</td>
+                    <td>{{object.binding|default:""}}</td>
+                    </tr>
+                    <tr>
+                    <td>Формат</td>
+                    <td>{{object.book_format|default:""}}</td>
+                    </tr>
+                    <tr>
+                    <td>Возрастные ограничения</td>
+                    <td>{{object.age_restriction|default:""}}+</td>
+                    </tr>
+                    <tr>
+                    <td>ISBN</td>
+                    <td>{{object.isbn_num|default:""}}</td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="starter-template">
+        </div>
+    {% endblock main_content  %}

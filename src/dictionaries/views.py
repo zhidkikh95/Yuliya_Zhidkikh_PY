@@ -8,10 +8,8 @@ from django.urls import  reverse_lazy
 def home_page(request):
     return render(request, template_name="base.html")
 
-class AuthorDetail(PermissionRequiredMixin, DetailView):
+class AuthorDetail(DetailView):
     model=Author
-    login_url='admin/'
-    permission_required = "dictionaries.view_author"
 
 class AuthorList(PermissionRequiredMixin, ListView):
     model=Author

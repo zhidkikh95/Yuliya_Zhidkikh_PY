@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from dictionaries import views 
 from books import views as bookviews
-from accounts import views as loginviews
+from accounts import views as logviews
+from django.conf.urls.static import static
+from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', bookviews.BookList.as_view(), name='book-list'),
+    path('', bookviews.HomePage.as_view(), name='home-page'),  
     path('authors', views.AuthorList.as_view(), name='author-list'),
     path('author/<int:pk>', views.AuthorDetail.as_view(), name='author-details'),
     path('author-delete/<int:pk>', views.AuthorDelete.as_view(), name='author-delete'),
@@ -39,5 +41,14 @@ urlpatterns = [
     path('book-series-delete/<int:pk>', views.BookSeriesDelete.as_view(), name='book-series-delete'),
     path('book-series-create/', views.BookSeriesCreate.as_view(), name='book-series-create'),
     path('book-series-update/<int:pk>', views.BookSeriesUpdate.as_view(), name='book-series-update'),
-    path('accounts/login', loginviews.MyLoginView.as_view(), name='login')
-]
+    path('accounts/login', logviews.MyLoginView.as_view(), name='login'),
+    path('accounts/logout', logviews.MyLogoutView.as_view(), name='logout'),
+    path('book/detail/<int:pk>', bookviews.BookDetail.as_view(), name="book-details"),
+    path('book/create/', bookviews.BookCreate.as_view(), name="book-create"),
+    path('book/list/', bookviews.BookList.as_view(), name="book-list"),   
+    path('book/update/<int:pk>', bookviews.BookUpdate.as_view(), name="book-update"),   
+] 
+
+if settings.DEBUG:
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title%} Книжный интернет-магазин {% endblock title %}
+{% block main_content %}
+  
+  <h2>Наши новинки</h2>
+ <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for book in object_list %}
+        <div class="col">
+          <div class="card shadow-sm" >
+            <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}"  height="400"></a>
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'book-details' book.pk %}">{{book.name}}</a><br>{{book.price}} руб.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-shopping-cart"></i></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'book-details' book.pk %}">View</a></button>
+                  {% if user.is_staff %}
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'book-update' book.pk %}">Edit</a></button>
+                  {% endif %}
+                </div>
+                {% comment %} <small class="text-muted">9 mins</small> {% endcomment %}
+              </div>
+            </div>
+          </div>          
+        </div>
+        {% endfor %}  
+      </div>
+    </div>
+  </div>
+    <br><h2>Последние авторы </h2>
+ <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for author in authors %}
+        <div class="col">
+          <div class="card shadow-sm">
+            {% comment %} <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}"></a> {% endcomment %}
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'author-details' author.pk %}">{{author.surname}}<br>{{author.name}}</a></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'author-details' author.pk %}">View</a></button>
+                  {% if user.is_staff %}
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'author-update' author.pk %}">Edit</a></button>
+                  {% endif %}
+                </div>
+                {% comment %} <small class="text-muted">9 mins</small> {% endcomment %}
+              </div>
+            </div>
+          </div>          
+        </div>
+        {% endfor %}  
+      </div>
+    </div>
+  </div>
+     
+
+{% endblock main_content  %}
