@@ -13,107 +13,107 @@ class AuthorDetail(DetailView):
 
 class AuthorList(PermissionRequiredMixin, ListView):
     model=Author
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_author", "dictionaries.delete_author", "dictionaries.add_author", "dictionaries.change_author")
 
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model=Author
     success_url=reverse_lazy('author-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.delete_author"
 
 class AuthorCreate(PermissionRequiredMixin, CreateView):
     model=Author
     fields=("surname","name","patronymic", "country", "birthdate", "biography") 
     success_url=reverse_lazy('author-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.add_author"
 
 class AuthorUpdate(PermissionRequiredMixin, UpdateView):
     model=Author
     fields=("surname","name","patronymic", "country", "birthdate", "biography") 
     success_url=reverse_lazy('author-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required =  "dictionaries.change_author"
 
 class PublisherList(PermissionRequiredMixin, ListView):
     model=Publisher
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_publisher", "dictionaries.delete_publisher", "dictionaries.add_publisher", "dictionaries.change_publisher")
 
 class PublisherDetail(PermissionRequiredMixin, DetailView):
     model=Publisher
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.view_publisher"
 
 class PublisherDelete(PermissionRequiredMixin, DeleteView):
     model=Publisher
     success_url=reverse_lazy('publisher-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.delete_publisher"
 
 class PublisherCreate(PermissionRequiredMixin, CreateView):
     model=Publisher    
     fields=("publisher_name", "publisher_description")
     success_url=reverse_lazy('publisher-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.add_publisher"
 
 class PublisherUpdate(PermissionRequiredMixin,UpdateView):
     model=Publisher    
     fields=("publisher_name", "publisher_description")
     success_url=reverse_lazy('publisher-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.change_publisher"
 
 class GenreList(PermissionRequiredMixin, ListView):
     model=Genre
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_genre", "dictionaries.delete_genre", "dictionaries.add_genre", "dictionaries.change_genre")
 
 class GenreDelete(PermissionRequiredMixin, DeleteView):
     model=Genre
     success_url=reverse_lazy('genre-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.delete_genre"
 
 class GenreCreate(PermissionRequiredMixin, CreateView):
     model=Genre
     fields=('genre_name',)
     success_url=reverse_lazy('genre-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.add_genre"
 
 class GenreUpdate(PermissionRequiredMixin, UpdateView):
     model=Genre
     fields=('genre_name',)
     success_url=reverse_lazy('genre-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.change_genre"
 
 class BookSeriesList(PermissionRequiredMixin, ListView):
     model=BookSeries
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_bookseries", "dictionaries.delete_bookseries", "dictionaries.add_bookseries", "dictionaries.change_bookseries")
 
 class BookSeriesDelete(PermissionRequiredMixin, DeleteView):
     model=BookSeries
     success_url=reverse_lazy('book-series-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.delete_bookseries"
 
 class BookSeriesCreate(PermissionRequiredMixin, CreateView):
     model=BookSeries
     fields=('series_name',)
     success_url=reverse_lazy('book-series-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.add_bookseries"
 
 class BookSeriesUpdate(PermissionRequiredMixin, UpdateView):
     model=BookSeries
     fields=('series_name',)
     success_url=reverse_lazy('book-series-list')
-    login_url='admin/'
+    login_url=reverse_lazy('login')
     permission_required = "dictionaries.change_bookseries"
 
 

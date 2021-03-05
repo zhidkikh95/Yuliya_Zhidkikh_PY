@@ -6,7 +6,7 @@
     <table class="table table-striped" width=70%>
         <tr>
             <th>Название книги</th>
-            <th>Цена</th>
+            <th>Цена, руб.</th>
             <th>Автор</th>
             <th>Серия</th>
             <th>Жанр</th>
@@ -19,18 +19,17 @@
         <tr>
             <td><a href="{% url 'book-details' book.pk %}">{{book.name}}</a></td>
             <td>{{book.price}}</td>
-            <td>{% for author in object.author.all %}{{author.surname}} {{author.name}} {{author.patronymic|default:""}}{% endfor %}</td>
+            <td>{% for author in book.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %}</td>
             <td>{{book.series}}</td>
-            <td>{% for gernre in objects.genre.all  %}{{book.genre}}{% endfor %}</td>
+            <td>{% for genre in book.genre.all %}{{genre.genre_name}}<br>{% endfor %}</td>
             <td>{{book.published_year}}</td>
             <td>{{book.publisher}}</td>
             <td>{{book.available_number}}</td>
-            <td>{{book.rate}}</td>            
+            <td>{% if book.rate %}{{book.rate}} <i class="fa fa-star" aria-hidden="true"></i>{% endif %}</td>            
         </tr>
         {% endfor %}
     </table>
     {% if user.is_staff%}
     <p align=center ><a href="{% url 'book-create'%}" class="btn btn-success">Добавить книгу</a></p>
     {% endif %}
-
 {% endblock main_content  %}
