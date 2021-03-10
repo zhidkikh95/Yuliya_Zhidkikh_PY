@@ -14,39 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from dictionaries import views 
-from books import views as bookviews
-from accounts import views as logviews
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from books import views as bookviews
+from dictionaries import urls as dictionaries_urls 
+from books import urls as books_urls
+from accounts import urls as accounts_urls
+from carts import urls as carts_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', bookviews.HomePage.as_view(), name='home-page'),  
-    path('authors', views.AuthorList.as_view(), name='author-list'),
-    path('author/<int:pk>', views.AuthorDetail.as_view(), name='author-details'),
-    path('author/delete/<int:pk>', views.AuthorDelete.as_view(), name='author-delete'),
-    path('author/create/', views.AuthorCreate.as_view(), name='author-create'),
-    path('author/update/<int:pk>', views.AuthorUpdate.as_view(), name='author-update'),
-    path('publishers', views.PublisherList.as_view(), name='publisher-list'),
-    path('publisher/<int:pk>', views.PublisherDetail.as_view(), name='publisher-details'),
-    path('publisher/delete/<int:pk>', views.PublisherDelete.as_view(), name='publisher-delete'),
-    path('publisher/create/', views.PublisherCreate.as_view(), name='publisher-create'),
-    path('publisher/update/<int:pk>', views.PublisherUpdate.as_view(), name='publisher-update'),
-    path('genres', views.GenreList.as_view(), name='genre-list'),
-    path('genre/delete/<int:pk>', views.GenreDelete.as_view(), name='genre-delete'),
-    path('genre/create/', views.GenreCreate.as_view(), name='genre-create'),
-    path('genre/update/<int:pk>', views.GenreUpdate.as_view(), name='genre-update'),
-    path('book-series', views.BookSeriesList.as_view(), name='book-series-list'),
-    path('book-series/delete/<int:pk>', views.BookSeriesDelete.as_view(), name='book-series-delete'),
-    path('book-series/create/', views.BookSeriesCreate.as_view(), name='book-series-create'),
-    path('book-series/update/<int:pk>', views.BookSeriesUpdate.as_view(), name='book-series-update'),
-    path('accounts/login', logviews.MyLoginView.as_view(), name='login'),
-    path('accounts/logout', logviews.MyLogoutView.as_view(), name='logout'),
-    path('book/detail/<int:pk>', bookviews.BookDetail.as_view(), name="book-details"),
-    path('book/create/', bookviews.BookCreate.as_view(), name="book-create"),
-    path('book/list/', bookviews.BookList.as_view(), name="book-list"),   
-    path('book/update/<int:pk>', bookviews.BookUpdate.as_view(), name="book-update"),   
+    path('dictionaries/', include(dictionaries_urls)),
+    path('accounts/', include(accounts_urls)),
+    path('book/', include(books_urls)),
+    path('cart/', include(carts_urls, namespace='cart'))   
 ] 
 
 if settings.DEBUG:

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} Профиль {{user}} {% endblock title %}
+{% block main_content %}
+<h1> Профиль {{user}}</h1>
+<br>
+<table class="table">
+  <tbody>
+      <tr>
+      <td>Имя</td>
+      <td>{{user.first_name}}</td>
+      </tr>
+      <tr>
+      <td>Фамилия</td>
+      <td>{{user.last_name}}</td>
+      </tr>
+      <tr>
+      <td>email</td>
+      <td>{{user.email}}</td>
+      </tr>
+      <tr>
+      <td>Телефон</td>
+      <td>{{user.profile.telephone}}</td>
+    </tr>
+    <tr>
+      <td>Адрес</td>
+      <td>{{user.profile.address}}</td>
+    </tr>
+    <tr>
+      <td>Дата создания профиля</td>
+      <td>{{user.date_joined}}</td>
+    </tr>
+  </tbody>
+</table>
+<p align=center><a href="{% url 'user-profile-update' user.pk %}" class="btn btn-info" >Редактировать</a></p>
+{% endblock main_content  %}

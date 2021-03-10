@@ -13,7 +13,7 @@
                                 <p class="card-text">{% if object.available_number > 10  %} В наличии {% elif object.available_number == 0  %} {% elif object.available_number < 11 %} Скоро закончится{% endif %}</p>  
                                 {% if object.available_number > 0 %}
                                 <div align=center>
-                                <button class="btn btn-primary"  type="button"><i class="fas fa-shopping-cart"></i>  Положить в корзину</button>
+                                <button class="btn btn-primary"  type="button"><a href="{% url 'cart:add-to-cart' %}?book={{object.pk}}" class="badge badge-primary"><i class="fas fa-shopping-cart"></i>Положить в корзину</a></button>
                                 </div>
                                 {% elif object.available_number == 0 %}
                                 <div align=center>

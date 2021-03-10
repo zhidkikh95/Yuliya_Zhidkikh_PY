@@ -15,6 +15,7 @@ class AuthorList(PermissionRequiredMixin, ListView):
     model=Author
     login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_author", "dictionaries.delete_author", "dictionaries.add_author", "dictionaries.change_author")
+    paginate_by = 10
 
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model=Author
@@ -40,6 +41,7 @@ class PublisherList(PermissionRequiredMixin, ListView):
     model=Publisher
     login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_publisher", "dictionaries.delete_publisher", "dictionaries.add_publisher", "dictionaries.change_publisher")
+    paginate_by = 10
 
 class PublisherDetail(PermissionRequiredMixin, DetailView):
     model=Publisher
@@ -70,6 +72,7 @@ class GenreList(PermissionRequiredMixin, ListView):
     model=Genre
     login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_genre", "dictionaries.delete_genre", "dictionaries.add_genre", "dictionaries.change_genre")
+    paginate_by = 10
 
 class GenreDelete(PermissionRequiredMixin, DeleteView):
     model=Genre
@@ -95,7 +98,8 @@ class BookSeriesList(PermissionRequiredMixin, ListView):
     model=BookSeries
     login_url=reverse_lazy('login')
     permission_required = ("dictionaries.view_bookseries", "dictionaries.delete_bookseries", "dictionaries.add_bookseries", "dictionaries.change_bookseries")
-
+    paginate_by = 10
+    
 class BookSeriesDelete(PermissionRequiredMixin, DeleteView):
     model=BookSeries
     success_url=reverse_lazy('book-series-list')
