@@ -5,7 +5,7 @@
         <p>{% for author in object.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %}</p>
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col col-md-12 col-lg-4" >
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="{{object.book_picture.url}}" alt="{{object.name}}"height="380">
                         <div class="card-body">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col cl-md-12 col-lg-8">
                     <p class='h5'>Вся информация:</p>
                     <table class="table table-borderless">
                     <tr>
