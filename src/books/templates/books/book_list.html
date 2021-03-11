@@ -22,15 +22,69 @@
     </div>
     <table class="table table-striped" width=70%>
         <tr>
-            <th>Название книги</th>
-            <th>Цена, руб.</th>
-            <th>Автор</th>
-            <th>Серия</th>
-            <th>Жанр</th>
-            <th>Год издания</th>
-            <th>Издательство</th>  
-            <th>Количество книг в наличии</th>
-            <th>Рейтинг</th>            
+            <th><a href="?field=name&direction={% if field_to_sort_on == 'name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Название книги
+            {% if field_to_sort_on == 'name' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'name' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=price&direction={% if field_to_sort_on == 'price' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Цена, руб.
+            {% if field_to_sort_on == 'price' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'price' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=author&direction={% if field_to_sort_on == 'author' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Автор
+            {% if field_to_sort_on == 'author' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'author' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=series&direction={% if field_to_sort_on == 'series' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Серия
+            {% if field_to_sort_on == 'series' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'series' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=genre&direction={% if field_to_sort_on == 'genre' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Жанр
+            {% if field_to_sort_on == 'genre' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'genre' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=published_year&direction={% if field_to_sort_on == 'published_year' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Год издания
+            {% if field_to_sort_on == 'published_year' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'published_year' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=publisher&direction={% if field_to_sort_on == 'publisher' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Издательство
+            {% if field_to_sort_on == 'publisher' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'publisher' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>  
+            <th><a href="?field=available_number&direction={% if field_to_sort_on == 'available_number' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Количество книг в наличии
+            {% if field_to_sort_on == 'available_number' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'available_number' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=rate&direction={% if field_to_sort_on == 'rate' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Рейтинг
+            {% if field_to_sort_on == 'rate' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'rate' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>            
         </tr>
         {% for book in object_list %}
         <tr>

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{object.book_picture.url}}" alt="{{object.name}}"height="360">
+                        <img class="card-img-top" src="{{object.book_picture.url}}" alt="{{object.name}}"height="380">
                         <div class="card-body">
                             <p class="h3">{{object.price}} руб.<br> 
                                 <p class="card-text">{% if object.available_number > 10  %} В наличии {% elif object.available_number == 0  %} {% elif object.available_number < 11 %} Скоро закончится{% endif %}</p>  

@@ -23,8 +23,23 @@
     </div>
     <table class="table table-striped" width=70%>
         <tr>
-            <th width=5%>#</th>
-            <th>Издательство</th>
+            <th width=5%><a href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">#
+            {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'pk' and direction_to_sort_on == 'down' %}
+            <i class="fas fa-chevron-down"></i>
+            {% else %}
+            {% endif %}
+            </a></th>
+            <th><a href="?field=publisher_name&direction={% if field_to_sort_on == 'publisher_name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Издательство
+            {% if field_to_sort_on == 'publisher_name' and direction_to_sort_on == 'up' %}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'publisher_name' and direction_to_sort_on == 'down' %}
+            <i class="fas fa-chevron-down"></i>
+            {% else %}
+            {% endif %}
+            </a></th>
+            
             <th width=15%>Действия</th>
         </tr>
         {% for publisher in object_list %}

@@ -24,10 +24,38 @@
     </div>
     <table class="table table-striped" width=70%>
         <tr>
-            <th width=5%>#</th>
-            <th>ФИО</th>
-            <th width=20%>Дата рождения</th>
-            <th width=20%>Страна</th>
+            <th width=5%><a href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}"> # 
+            {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'pk' and direction_to_sort_on == 'down' %}
+            <i class="fas fa-chevron-down"></i>
+            {% else %}
+            {% endif %}
+            </a></th>
+            <th><a href="?field=surname&direction={% if field_to_sort_on == 'surname' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">ФИО
+            {% if field_to_sort_on == 'surname' and direction_to_sort_on == 'up' %}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'surname' and direction_to_sort_on == 'down' %}
+            <i class="fas fa-chevron-down"></i>
+            {% else %}
+            {% endif %}
+            </a></th>
+            <th width=20%><a href="?field=birthdate&direction={% if field_to_sort_on == 'birthdate' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Дата рождения
+            {% if field_to_sort_on == 'birthdate' and direction_to_sort_on == 'up' %}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'birthdate' and direction_to_sort_on == 'down' %}
+            <i class="fas fa-chevron-down"></i>
+            {% else %}
+            {% endif %}
+            </a></th>
+            <th width=20%><a href="?field=country&direction={% if field_to_sort_on == 'country' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Страна
+            {% if field_to_sort_on == 'country' and direction_to_sort_on == 'up' %}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'country' and direction_to_sort_on == 'down' %}
+            <i class="fas fa-chevron-down"></i>
+            {% else %}
+            {% endif %}            
+            </a></th>
             <th width=15%>Действия</th>
         </tr>
         {% for author in object_list %}

@@ -10,7 +10,7 @@
         {% for book in object_list %}
         <div class="col">
           <div class="card shadow-sm h-100" >
-            <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}"  min-height: 200px></a>
+            <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}" height="280px"</a>
             <div class="card-body" >
               <p class="card-text"><a href="{% url 'book-details' book.pk %}">{{book.name}}</a><br>{{book.price}} руб.</p>
               <div class="d-flex justify-content-between">
