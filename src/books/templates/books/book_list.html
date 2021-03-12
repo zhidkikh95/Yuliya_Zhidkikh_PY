@@ -2,7 +2,6 @@
 {% block title%} Книги {% endblock title %}
 {% block main_content %}
   
-  <h1>Все книги:</h1>
         <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -20,8 +19,9 @@
             {% endif %}
         </span>
     </div>
-    <table class="table table-striped" width=70%>
+    <table class="table" width=80%>
         <tr>
+            <th>Обложка</th>
             <th><a href="?field=name&direction={% if field_to_sort_on == 'name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Название книги
             {% if field_to_sort_on == 'name' and direction_to_sort_on == 'up'%}
             <i class="fas fa-chevron-up"></i>
@@ -88,6 +88,7 @@
         </tr>
         {% for book in object_list %}
         <tr>
+            <td><img src="{{book.book_picture.url}}" alt="{{book.name}}" height=200 width=130></td>
             <td><a href="{% url 'book-details' book.pk %}">{{book.name}}</a></td>
             <td>{{book.price}}</td>
             <td>{% for author in book.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %}</td>

@@ -20,15 +20,14 @@ class BookList(ListView):
         context['field_to_sort_on'] = field_to_sort_on
         context['direction_to_sort_on'] = direction_to_sort_on
         return context
+
     def get_ordering(self):
         ordering_by = 'pk'    
         field_to_sort_on = self.request.GET.get('field')
         direction_to_sort_on = self.request.GET.get('direction')
+        direction = {'up': ""}
         if field_to_sort_on and direction_to_sort_on:
-            if direction_to_sort_on == 'up':
-                ordering_by = field_to_sort_on
-            else:
-                ordering_by = f"-{field_to_sort_on}"
+            ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
 
 class HomePage(ListView):

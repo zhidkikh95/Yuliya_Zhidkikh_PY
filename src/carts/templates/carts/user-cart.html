@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 {% block title%} Корзина {% endblock title %}
 {% block main_content %}
-<h1>Товары в корзине {{user}}</h1>
+<h1>Товары в корзине </h1>
 <br>
 <table class="table">
   <tbody>
-{% for book in books_in_cart %}
+{% for book in object.books.all %}
     <tr>
       <td><img  width="150" src="{{book.book.book_picture.url}}" alt="{{book.book.name}}"></td>
       <td>{{book.book}}</td>

@@ -70,7 +70,7 @@
         <a class="nav-link" href="{% url 'book-list' %}">Каталог<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        {% comment %} <a class="nav-link" href="{% url 'cart:user-cart' user.pk %}">Корзина<span class="sr-only">(current)</span></a> {% endcomment %}
+        <a class="nav-link" href="{% url 'cart:user-cart'  %}?cart={{request.session.current_cart_pk}}">Корзина<span class="sr-only">(current)</span></a>
       </li>
 
       {% if user.is_staff %}
