@@ -11,14 +11,14 @@
         <div class="col">
           <div class="card shadow-sm h-100" >
             <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}" height="280px"</a>
-            <div class="card-body" >
+            <div id='card-body' class="card-body" >
               <p class="card-text"><a href="{% url 'book-details' book.pk %}">{{book.name}}</a><br>{{book.price}} руб.</p>
-              <div class="d-flex justify-content-between">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}"><i class="fas fa-shopping-cart"></i></a></button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'book-details' book.pk %}">View</a></button>
+              <div>
+                <div id='btn-group' class="btn-group">
+                  <a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-shopping-cart"></i></a>
+                  <a href="{% url 'book-details' book.pk %}" class="btn btn-sm btn-outline-secondary">View</a>
                   {% if user.is_staff %}
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'book-update' book.pk %}">Edit</a></button>
+                  <a href="{% url 'book-update' book.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
                   {% endif %}
                 </div>
                 {% comment %} <small class="text-muted">9 mins</small> {% endcomment %}

@@ -16,6 +16,14 @@ class Cart(models.Model):
     def __str__(self):
         return f"Корзина {self.customer}"
 
+    @property 
+    def total_summ(self):
+        all_books = self.books.all()
+        total = 0
+        for book in all_books:
+            total += book.total_price
+        return total
+
 class BookInCart(models.Model):
     cart = models.ForeignKey(
         Cart, 
@@ -27,8 +35,13 @@ class BookInCart(models.Model):
         on_delete=models.PROTECT,
         verbose_name="Товары в корзине" 
     )
-    quantity = models.IntegerField(
+    quantity = models.PositiveIntegerField(
         verbose_name = "Колечество товара",
         default = 1)
+        
     def __str__(self):
         return f"{self.book} в корзине {self.cart}"
+
+    @property
+    def total_price(self):
+        return self.book.price *self.quantity

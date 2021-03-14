@@ -2,18 +2,27 @@
 {% load crispy_forms_tags %}
 {% block title%} Корзина {% endblock title %}
 {% block main_content %}
-<h1>Добавление товара в корзину</h1>
+<h1>Корзина</h1>
 <br>
-<table class="table">
-  <tbody>
-{% for book_in_cart in object.books.all %}
-    <tr>
-      <td><img  width="150" src="{{book_in_cart.book.book_picture.url}}" alt="{{book_in_cart.book.name}}"></td>
-      <td>{{book_in_cart.book}}</td>
-      <td>{{book_in_cart.quantity}} шт.</td>
-      <td>{{book_in_cart.book.price}} руб.</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+<form action="{% url 'cart:recalculate-cart'%}" method="GET">
+  <table class="table">
+    <tbody>
+  {% for book_in_cart in object.books.all %}
+      <tr>
+        <td><img  width="70" src="{{book_in_cart.book.book_picture.url}}" alt="{{book_in_cart.book.name}}"></td>
+        <td>{{book_in_cart.book}}</td>
+        <td>{{book_in_cart.book.price}} руб.</td>
+        <td><input type='number' min=0 name="{{book_in_cart.pk}}" value={{book_in_cart.quantity}}> шт.</td>
+        <td>{{book_in_cart.total_price}} руб.</td>
+      </tr>
+    {% endfor %}
+      <tr>
+        <td colspan=4><b>Итого:</b></td>
+        <td><b>{{object.total_summ}} руб.</b></td>
+      </tr>
+    </tbody>
+  </table>
+<button type="submit" name="btn" value='recalculate' class='btn btn-success'>Рассчитать</button>
+<button type="submit" name="btn" value='checkout' class='btn btn-warning'>Оформить заказ</button>
+</form>
 {% endblock main_content  %}
