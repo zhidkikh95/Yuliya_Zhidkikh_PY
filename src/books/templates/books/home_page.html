@@ -12,7 +12,8 @@
           <div class="card shadow-sm h-100" >
             <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}" height="280px"</a>
             <div id='card-body' class="card-body" >
-              <p class="card-text"><a href="{% url 'book-details' book.pk %}">{{book.name}}</a><br>{{book.price}} руб.</p>
+              <div id='book-name' ><a href="{% url 'book-details' book.pk %}">{{book.name}}</a></div>
+              <div class="card-text" >{{book.price}} руб.</div>
               <div>
                 <div id='btn-group' class="btn-group">
                   <a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-shopping-cart"></i></a>
