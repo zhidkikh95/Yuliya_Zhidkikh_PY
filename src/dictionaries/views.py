@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView, DeleteView, CreateView, U
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
+from . import forms
 
 def home_page(request):
     return render(request, template_name="base.html")
@@ -24,6 +25,13 @@ class AuthorList(PermissionRequiredMixin, ListView):
         print(field_to_sort_on, direction_to_sort_on)
         context["field_to_sort_on"] = field_to_sort_on
         context["direction_to_sort_on"] = direction_to_sort_on
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
         return context
         
     def get_ordering(self):
@@ -34,6 +42,13 @@ class AuthorList(PermissionRequiredMixin, ListView):
         if field_to_sort_on and direction_to_sort_on:
             ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
+    
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(surname__icontains=query) 
+        return query_set
 
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model=Author
@@ -68,6 +83,13 @@ class PublisherList(PermissionRequiredMixin, ListView):
         print(field_to_sort_on, direction_to_sort_on)
         context["field_to_sort_on"] = field_to_sort_on
         context["direction_to_sort_on"] = direction_to_sort_on
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
         return context
         
     def get_ordering(self):
@@ -78,6 +100,13 @@ class PublisherList(PermissionRequiredMixin, ListView):
         if field_to_sort_on and direction_to_sort_on:
             ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(publisher_name__icontains=query) 
+        return query_set
 
 class PublisherDetail(PermissionRequiredMixin, DetailView):
     model=Publisher
@@ -117,6 +146,13 @@ class GenreList(PermissionRequiredMixin, ListView):
         print(field_to_sort_on, direction_to_sort_on)
         context["field_to_sort_on"] = field_to_sort_on
         context["direction_to_sort_on"] = direction_to_sort_on
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
         return context
 
     def get_ordering(self):
@@ -127,6 +163,13 @@ class GenreList(PermissionRequiredMixin, ListView):
         if field_to_sort_on and direction_to_sort_on:
             ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(genre_name__icontains=query) 
+        return query_set
 
 class GenreDelete(PermissionRequiredMixin, DeleteView):
     model=Genre
@@ -161,6 +204,13 @@ class BookSeriesList(PermissionRequiredMixin, ListView):
         print(field_to_sort_on, direction_to_sort_on)
         context["field_to_sort_on"] = field_to_sort_on
         context["direction_to_sort_on"] = direction_to_sort_on
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
         return context
 
     def get_ordering(self):
@@ -171,6 +221,13 @@ class BookSeriesList(PermissionRequiredMixin, ListView):
         if field_to_sort_on and direction_to_sort_on:
             ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(series_name__icontains=query) 
+        return query_set
 
 class BookSeriesDelete(PermissionRequiredMixin, DeleteView):
     model=BookSeries
