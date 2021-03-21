@@ -1,7 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% block title%} История заказов {% endblock title %}
+
 {% block main_content %}
     <h3>Заказы</h3> 
+    <form action="" method="GET">
+    {{search_form|crispy}}
+    </form>
 <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}

@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from carts import models as cart_models
 from accounts import models as account_models
 from django.contrib.auth.models import User
+from . import forms
 
 
 from . import models
@@ -62,15 +63,32 @@ class UserOrder(ListView):
     model = models.Order
     template_name = 'orders/order_user_history.html'
     paginate_by = 5
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_customer = self.request.user 
         customer_carts = cart_models.Cart.objects.filter(customer = current_customer)
-        print(customer_carts)
         user_orders = models.Order.objects.filter(cart__in = customer_carts)
-        print(user_orders)
         context["user_orders"] = user_orders
+        field_to_sort_on = self.request.GET.get('field')
+        direction_to_sort_on = self.request.GET.get('direction')
+        context["field_to_sort_on"] = field_to_sort_on
+        context["direction_to_sort_on"] = direction_to_sort_on
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
         return context
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(created__icontains=query) 
+        return query_set
     
 class OrderList(PermissionRequiredMixin, ListView):
     queryset = models.Order.objects.all().order_by('pk')
@@ -85,6 +103,13 @@ class OrderList(PermissionRequiredMixin, ListView):
         direction_to_sort_on = self.request.GET.get('direction')
         context["field_to_sort_on"] = field_to_sort_on
         context["direction_to_sort_on"] = direction_to_sort_on
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
         return context
     
     def get_ordering(self):
@@ -95,6 +120,13 @@ class OrderList(PermissionRequiredMixin, ListView):
         if field_to_sort_on and direction_to_sort_on:
             ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
+    
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(address__icontains=query) 
+        return query_set
 
 class OrderUpdate(PermissionRequiredMixin, UpdateView):
     model = models.Order
