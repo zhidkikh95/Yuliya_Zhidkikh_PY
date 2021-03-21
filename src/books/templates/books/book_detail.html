@@ -9,14 +9,14 @@
                         <img class="card-img-top" src="{{object.book_picture.url}}" alt="{{object.name}}"height="380">
                         <div class="card-body">
                             <p class="h3">{{object.price}} руб.<br> 
-                                <p class="card-text">{% if object.available_number > 10  %} В наличии {% elif object.available_number == 0  %} {% elif object.available_number < 11 %} Скоро закончится{% endif %}</p>  
-                                {% if object.available_number > 0 %}
+                                <p class="card-text">{% if object.is_available == 'Да' and object.available_number > 10  %} В наличии {% elif object.available_number == 0 or object.is_available == 'Нет' %}Недоступно для заказа{% elif object.is_available == 'Да' and object.available_number < 11  %} Скоро закончится {% endif %}</p>  
+                                {% if object.is_available == 'Да' and object.available_number > 0 %}
                                 <div align=center>
                                 <a href="{% url 'cart:add-to-cart' %}?book={{object.pk}}" class="btn btn-success btn-lg"><i class="fas fa-shopping-cart"></i> Положить в корзину</a>
                                 </div>
-                                {% elif object.available_number == 0 %}
+                                {% elif object.available_number == 0 or object.is_available == 'Нет' %}
                                 <div align=center>
-                                    <button class="btn btn-success btn-lg"  type="button" disabled><i class="fas fa-shopping-cart"></i>  Нет в наличии</button>
+                                    <button class="btn btn-success btn-lg"  type="button" disabled><i class="fas fa-shopping-cart"></i> Положить в корзину</button>
                                 </div>
                                 {% endif %}
                             </p>    
