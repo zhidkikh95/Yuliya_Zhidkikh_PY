@@ -61,7 +61,7 @@ class OrderConfirm(UpdateView):
 class UserOrder(ListView):
     model = models.Order
     template_name = 'orders/order_user_history.html'
-
+    paginate_by = 5
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_customer = self.request.user 
@@ -118,9 +118,3 @@ class OrderDetail(DetailView):
 class OrderSuccess(DetailView):
     model = models.Order
     template_name='orders/order_success.html'
-
-    # class OrderSuccess(RedirectView):
-    #     template_name =
-    # def get_redirect_url(self, *args, **kwargs):
-        
-    #     return return_urls.get(action, reverse('cart:add-to-cart'))

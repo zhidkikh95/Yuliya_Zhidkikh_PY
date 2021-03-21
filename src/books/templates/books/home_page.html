@@ -5,7 +5,6 @@
   <h2 class="alert alert-warning" >Наши новинки</h2>
  <div class="album py-5 bg-light">
     <div class="container">
-      {% comment %} <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> {% endcomment %}
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
         {% for book in object_list %}
         <div class="col">
@@ -15,10 +14,10 @@
               <div id='book-name' ><a class="link-success text-body " href="{% url 'book-details' book.pk %}">{{book.name}}</a></div>
               <div class="card-text" >{{book.price}} руб.</div>
               {% if book.rate == 5  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> {% endif %}
-              {% if book.rate == 4  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
-              {% if book.rate == 3  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
-              {% if book.rate == 2  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
-              {% if book.rate == 1  %}<i class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 4  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
+              {% if book.rate == 3  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
+              {% if book.rate == 2  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 1  %}<i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
               <div>
                 <div id='btn-group' class="btn-group">
                   <a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i id='cart' class="fas fa-shopping-cart"></i></a>
@@ -34,7 +33,7 @@
       </div>
     </div>
   </div>
-    <br><h2>Последние авторы </h2>
+    <br><h2  class="alert alert-warning">Авторы </h2>
  <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
@@ -45,13 +44,9 @@
             <div class="card-body ">
               <p class="card-text"><a href="{% url 'author-details' author.pk %}">{{author.surname}}<br>{{author.name}}</a></p>
               <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'author-details' author.pk %}">View</a></button>
                   {% if user.is_staff %}
-                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'author-update' author.pk %}">Edit</a></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'author-update' author.pk %}"><i id='pencil' class="fa fa-pencil" aria-hidden="true"></i></a></button>
                   {% endif %}
-                </div>
-                {% comment %} <small class="text-muted">9 mins</small> {% endcomment %}
               </div>
             </div>
           </div>          
