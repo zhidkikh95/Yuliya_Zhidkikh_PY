@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} Редактирование заказа {% endblock title %}
+{% block main_content %}
+    <h1>Редактирование заказа</h1>
+    <h5>{{cart.customer.first_name}}</h5>
+    {% for book in cart.books.all %}{{book.book.name}} {{book.book.price}} руб. x{{book.quantity}}<br>{% endfor %}
+    </p>   
+    <h6>Итого: {{cart.total_summ}} руб. </h6>  
+    <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button align=center class="btn btn-success">Готово</button>
+    </form>
+{% endblock main_content  %}

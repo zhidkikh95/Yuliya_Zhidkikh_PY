@@ -15,19 +15,19 @@ def harvest_data(cbv_obj):
 
 
 def update_items_in_cart(cart_items_from_form, current_cart_pk):
-    # action = None
+    action = None
     cart = Cart.objects.filter(pk=current_cart_pk).first()
     if not cart:
         return
     items = cart.books.all()
     for book_pk, quantity  in cart_items_from_form.items():
         if book_pk == 'btn':
-            continue
-            # action = quantity 
+            action = quantity
+            continue 
         item = items.filter(pk=book_pk).first()
         if item and int(quantity) > 0:
             item.quantity = quantity
             item.save()
         else:
             item.delete()
-    # return action
+    return action

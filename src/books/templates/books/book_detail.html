@@ -1,8 +1,7 @@
     {% extends "base.html" %}
     {% block title%} "{{object.name}}" {% endblock title %}
     {% block main_content %}
-        <h1>{{object.name}}</h1>
-        <p>{% for author in object.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %}</p>
+        
         <div class="container">
             <div class="row">
                 <div class="col col-md-12 col-lg-4" >
@@ -13,11 +12,11 @@
                                 <p class="card-text">{% if object.available_number > 10  %} В наличии {% elif object.available_number == 0  %} {% elif object.available_number < 11 %} Скоро закончится{% endif %}</p>  
                                 {% if object.available_number > 0 %}
                                 <div align=center>
-                                <a href="{% url 'cart:add-to-cart' %}?book={{object.pk}}" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Положить в корзину</a>
+                                <a href="{% url 'cart:add-to-cart' %}?book={{object.pk}}" class="btn btn-success btn-lg"><i class="fas fa-shopping-cart"></i> Положить в корзину</a>
                                 </div>
                                 {% elif object.available_number == 0 %}
                                 <div align=center>
-                                    <button class="btn btn-primary"  type="button" disabled><i class="fas fa-shopping-cart"></i>  Нет в наличии</button>
+                                    <button class="btn btn-success btn-lg"  type="button" disabled><i class="fas fa-shopping-cart"></i>  Нет в наличии</button>
                                 </div>
                                 {% endif %}
                             </p>    
@@ -25,9 +24,11 @@
                     </div>
                     <br>
                 </div>
-                <div class="col cl-md-12 col-lg-8">
+                <div class="col cl-md-12 col-lg-8"><br>
+                <h1>{{object.name}} <a href="{% url 'book-update' book.pk %}">{% if user.is_staff %}<i class="fa fa-pencil" aria-hidden="true"></i></a>{% endif %}</h1>
+                <p>{% for author in object.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %} </p>
                     <p class='h5'>Вся информация:</p>
-                    <table class="table table-borderless">
+                    <table class="table table-borderless table-sm">
                     <tr>
                     <td width=40%>Жанр</td>
                     <td>{% for genre in object.genre.all %}{{genre.genre_name}} {% endfor %}</td>

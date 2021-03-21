@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} Информация о заказе {% endblock title %}
+{% block main_content %}
+    <h1>Заказ # {{object.pk}}</h1>
+    <table class="table table-success">
+    <tr>
+        <th>Создан</th>
+        <th>Статус</th>
+        <th>Номер телефона</th>
+        <th>Адрес</th>
+        <th>Комментарии</th>
+    </tr>
+    <tr>
+        <td>{{object.created}}</td>
+        <td>{{object.order_status}}</td>
+        <td>{{object.telephone_number}}<td>
+        <td>{{object.address}}</td>
+        <td>{{object.customer_comments}}</td>
+    </tr>
+    </table>
+    <table class='table'>
+        {% for ordered_book in object.cart.books.all %}
+        <tr>
+            <td><img  width="70" src="{{ordered_book.book.book_picture.url}}" alt="{{ordered_book.book.name}}"></td>
+            <td>{{ordered_book.book}}</td>
+            <td>{{ordered_book.book.price}} руб.</td>
+            <td>{{ordered_book.quantity}} шт.</td>
+            <td>{{ordered_book.total_price}} руб.</td>
+        </tr>
+        {% endfor %}
+        <tr>
+        <td colspan=4><b>Итого:</b></td>
+        <td><b>{{object.cart.total_summ}} руб.</b></td>
+      </tr>
+    </table> 
+
+{% endblock main_content  %}

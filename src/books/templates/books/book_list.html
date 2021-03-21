@@ -1,6 +1,10 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title%} Книги {% endblock title %}
 {% block main_content %}
+    <form action="" method="GET">
+    {{search_form|crispy}}
+    </form>
         <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -28,17 +32,17 @@
             <i class="fas fa-chevron-down"></i>
             {% endif %}
             </a></th>
-            <th><a href="?field=price&direction={% if field_to_sort_on == 'price' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Цена, руб.
-            {% if field_to_sort_on == 'price' and direction_to_sort_on == 'up'%}
-            <i class="fas fa-chevron-up"></i>
-            {% elif field_to_sort_on == 'price' and direction_to_sort_on == 'down'%}
-            <i class="fas fa-chevron-down"></i>
-            {% endif %}
-            </a></th>
             <th><a href="?field=author&direction={% if field_to_sort_on == 'author' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Автор
             {% if field_to_sort_on == 'author' and direction_to_sort_on == 'up'%}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'author' and direction_to_sort_on == 'down'%}
+            <i class="fas fa-chevron-down"></i>
+            {% endif %}
+            </a></th>
+            <th><a href="?field=price&direction={% if field_to_sort_on == 'price' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Цена, руб.
+            {% if field_to_sort_on == 'price' and direction_to_sort_on == 'up'%}
+            <i class="fas fa-chevron-up"></i>
+            {% elif field_to_sort_on == 'price' and direction_to_sort_on == 'down'%}
             <i class="fas fa-chevron-down"></i>
             {% endif %}
             </a></th>
@@ -70,13 +74,6 @@
             <i class="fas fa-chevron-down"></i>
             {% endif %}
             </a></th>  
-            <th><a href="?field=available_number&direction={% if field_to_sort_on == 'available_number' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Количество книг в наличии
-            {% if field_to_sort_on == 'available_number' and direction_to_sort_on == 'up'%}
-            <i class="fas fa-chevron-up"></i>
-            {% elif field_to_sort_on == 'available_number' and direction_to_sort_on == 'down'%}
-            <i class="fas fa-chevron-down"></i>
-            {% endif %}
-            </a></th>
             <th><a href="?field=rate&direction={% if field_to_sort_on == 'rate' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Рейтинг
             {% if field_to_sort_on == 'rate' and direction_to_sort_on == 'up'%}
             <i class="fas fa-chevron-up"></i>
@@ -84,19 +81,21 @@
             <i class="fas fa-chevron-down"></i>
             {% endif %}
             </a></th>            
+            <th>Положить в корзину
+            </th>
         </tr>
         {% for book in object_list %}
         <tr>
             <td><img src="{{book.book_picture.url}}" alt="{{book.name}}" height=200 width=130></td>
             <td><a href="{% url 'book-details' book.pk %}">{{book.name}}</a></td>
-            <td>{{book.price}}</td>
             <td>{% for author in book.author.all %}<a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a><br>{% endfor %}</td>
+            <td>{{book.price}}</td>
             <td>{{book.series}}</td>
             <td>{% for genre in book.genre.all %}{{genre.genre_name}}<br>{% endfor %}</td>
             <td>{{book.published_year}}</td>
             <td>{{book.publisher}}</td>
-            <td>{{book.available_number}}</td>
             <td>{% if book.rate %}{{book.rate}} <i class="fa fa-star" aria-hidden="true"></i>{% endif %}</td>            
+            <td align=center><a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}"><i id='i-cart-list' class="fas fa-shopping-cart"></i></a></td>
         </tr>
         {% endfor %}
     </table>

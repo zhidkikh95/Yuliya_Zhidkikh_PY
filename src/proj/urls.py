@@ -22,6 +22,7 @@ from dictionaries import urls as dictionaries_urls
 from books import urls as books_urls
 from accounts import urls as accounts_urls
 from carts import urls as carts_urls
+from orders import urls as orders_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +30,8 @@ urlpatterns = [
     path('dictionaries/', include(dictionaries_urls)),
     path('accounts/', include(accounts_urls)),
     path('book/', include(books_urls)),
-    path('cart/', include(carts_urls, namespace='cart'))   
+    path('cart/', include(carts_urls, namespace='cart')),
+    path('order/', include(orders_urls, namespace='order'))   
 ] 
 
 if settings.DEBUG:

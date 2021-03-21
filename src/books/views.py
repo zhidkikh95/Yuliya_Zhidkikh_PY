@@ -6,6 +6,7 @@ from dictionaries.models import Author
 from django.views.generic import DetailView, ListView, DeleteView, CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import  reverse_lazy
+from . import forms
 
 class BookList(ListView):
     model=Book
@@ -17,6 +18,14 @@ class BookList(ListView):
         authors=authors.reverse()[:5]
         field_to_sort_on=self.request.GET.get('field')
         direction_to_sort_on=self.request.GET.get('direction')
+        query = self.request.GET.get('query')
+        context['search_form'] = forms.SearchForm(
+            initial={
+                'query': query,
+                'field': field_to_sort_on,      
+                'direction': direction_to_sort_on
+            })
+
         context['field_to_sort_on'] = field_to_sort_on
         context['direction_to_sort_on'] = direction_to_sort_on
         return context
@@ -29,6 +38,14 @@ class BookList(ListView):
         if field_to_sort_on and direction_to_sort_on:
             ordering_by = f"{direction.get(direction_to_sort_on, '-')}{field_to_sort_on}"
         return ordering_by
+    
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        query_set = super().get_queryset()
+        if query:
+           query_set = query_set.filter(name__icontains=query) 
+        return query_set
+    
 
 class HomePage(ListView):
     queryset = Book.objects.all().order_by('pk')

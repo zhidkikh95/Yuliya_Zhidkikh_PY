@@ -35,6 +35,12 @@ class BookInCart(models.Model):
         on_delete=models.PROTECT,
         verbose_name="Товары в корзине" 
     )
+    price = models.DecimalField(
+        verbose_name="Цена, руб.",
+        max_digits=5,
+        decimal_places=2,
+        blank=True, null=True)
+        
     quantity = models.PositiveIntegerField(
         verbose_name = "Колечество товара",
         default = 1)

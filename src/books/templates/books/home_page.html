@@ -2,7 +2,7 @@
 {% block title%} Книжный интернет-магазин {% endblock title %}
 {% block main_content %}
   
-  <h2>Наши новинки</h2>
+  <h2 class="alert alert-warning" >Наши новинки</h2>
  <div class="album py-5 bg-light">
     <div class="container">
       {% comment %} <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> {% endcomment %}
@@ -10,10 +10,15 @@
         {% for book in object_list %}
         <div class="col">
           <div class="card shadow-sm h-100" >
-            <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}" height="280px"</a>
+            <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}" height="280px"></a>
             <div id='card-body' class="card-body" >
-              <div id='book-name' ><a href="{% url 'book-details' book.pk %}">{{book.name}}</a></div>
+              <div id='book-name' ><a class="link-success text-body " href="{% url 'book-details' book.pk %}">{{book.name}}</a></div>
               <div class="card-text" >{{book.price}} руб.</div>
+              {% if book.rate == 5  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 4  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 3  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 2  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 1  %}<i class="fa fa-star" aria-hidden="true"></i>{% endif %}
               <div>
                 <div id='btn-group' class="btn-group">
                   <a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-shopping-cart"></i></a>

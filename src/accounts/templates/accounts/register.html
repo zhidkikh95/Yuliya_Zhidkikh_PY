@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title%} Регистрация пользователя {% endblock title %}
+{% block main_content %}
+<h1>Регистрация пользователя</h1>
+    <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button align=center class="btn btn-success">Готово</button>
+    </form>
+{% endblock main_content %}

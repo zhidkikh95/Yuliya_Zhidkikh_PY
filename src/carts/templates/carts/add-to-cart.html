@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% block title%} Корзина {% endblock title %}
 {% block main_content %}
+{% if object  %}
 <h1>Корзина</h1>
 <br>
 <form action="{% url 'cart:recalculate-cart'%}" method="GET">
@@ -25,4 +26,8 @@
 <button type="submit" name="btn" value='recalculate' class='btn btn-success'>Рассчитать</button>
 <button type="submit" name="btn" value='checkout' class='btn btn-warning'>Оформить заказ</button>
 </form>
+{% else %}
+<h2>Ваша корзина пуста</h2><br>
+<a href = "{% url 'book-list' %}" class='btn btn-success'>Перейти в каталог</a>
+{% endif %}
 {% endblock main_content  %}

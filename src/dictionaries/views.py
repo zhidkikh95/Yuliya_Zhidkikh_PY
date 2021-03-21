@@ -3,7 +3,7 @@ from dictionaries.models import Author, Publisher, Genre, BookSeries
 from django.views.generic import DetailView, ListView, DeleteView, CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User, Group
-from django.urls import  reverse_lazy
+from django.urls import reverse_lazy
 
 def home_page(request):
     return render(request, template_name="base.html")

@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView, DeleteView, CreateView, UpdateView
 from django.contrib.auth import authenticate, login, views, logout
-from django.urls import  reverse_lazy
+# from django.contrib.auth.forms import UserCreationForm
+from django.urls import  reverse_lazy, reverse
 from django.contrib.auth import get_user_model
 from accounts.models import Profile
+from accounts.forms import UserCreationForm
+
 User = get_user_model()
 # Create your views here.
 
@@ -17,23 +20,42 @@ class UserProfile(DetailView):
     model = User
     template_name="accounts/user_detail.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     current_user = self.request.user
-    #     print(current_user)
-    #     telephone = current_user.profile.telephone
-    #     address = current_user.profile.address
-    #     print(telephone, address)
-    #     context["telephone"] = telephone
-    #     context["address"] = address
-    #     return context
+def register(request):
+    if request.method == "GET":
+        return render(
+            request, 'accounts/register.html',
+            {"form": UserCreationForm}
+        )
+    elif request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect(reverse('user-profile-update'))
+        return render(request, 'accounts/register.html', {'form': form})
 
    
 
-class UserProfileUpdate(UpdateView):
+class UserUpdate(UpdateView):
     model = User
     template_name="accounts/user_form.html"
     fields=('username', 'email', 'first_name', 'last_name')
     def get_success_url(self):
         current_user=self.request.user
-        return reverse_lazy('user-profile', kwargs={'pk': current_user.pk})
+        return reverse_lazy('home-page')
+
+
+class UserProfileUpdate(UpdateView):
+    model = Profile
+    template_name="accounts/user_profile_form.html"
+    fields = ('telephone', 'address')
+    success_url = reverse_lazy('home-page')
+
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        print(user)
+        profile, profile_created= Profile.objects.get_or_create(
+            user = user
+        ) 
+        print(profile)
+        return profile

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} Подтверждение заказа {% endblock title %}
+{% block main_content %}
+    <h1>Подтверждение заказа</h1><hr> 
+    <h6>{{cart.customer.first_name|default:"Пожалуйста, укажите Ваше имя в поле <b>Комментарии к заказу</b>"}}</h6><hr>
+    {% for book in cart.books.all %}{{book.book.name}} {{book.book.price}} руб. x{{book.quantity}}<br>{% endfor %}
+    </p>   
+    <h4>Итого: {{cart.total_summ}} руб. <a href="{% url 'cart:add-to-cart' %}"  class='btn btn-warning'>Вернуться к корзине</a></h4>
+    <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button align=center class="btn btn-success">Готово</button>
+    </form>
+{% endblock main_content  %}

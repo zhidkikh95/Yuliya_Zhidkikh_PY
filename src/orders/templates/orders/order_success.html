@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title%} Заказ создан {% endblock title %}
+{% block main_content %}
+<div> <h1><span class="align-middle"><i class="fad fa-check-circle"></i></span> Спасибо за заказ!</h1>
+Ваш заказ принят оператором. Мы свяжемся с Вами в ближайшее время.<br><br>
+
+Статус заказа можно отслеживать <a href="{% url 'order:detail' object.pk %}">здесь</a>.
+
+</div>
+
+
+{% endblock main_content  %}

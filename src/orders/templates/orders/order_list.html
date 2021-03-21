@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title%} История заказов {% endblock title %}
+{% block main_content %}
+    <h3>История заказов</h3> <br>
+      
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>   
+<table class='table table-hover'>
+<tr>
+    <th><a href="{% url 'order:list'%}?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up'  %}down{% else %}up{% endif %}">#
+    {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %} <i class="fas fa-chevron-up"></i>
+    {% elif field_to_sort_on == 'pk' and direction_to_sort_on == 'down' %} <i class="fas fa-chevron-down"></i>
+    {% endif %}
+    </a></th>
+    <th><a href="{% url 'order:list'%}?field=created&direction={% if field_to_sort_on == 'created' and direction_to_sort_on == 'up'  %}down{% else %}up{% endif %}">Дата
+    {% if field_to_sort_on == 'created' and direction_to_sort_on == 'up' %} <i class="fas fa-chevron-up"></i>
+    {% elif field_to_sort_on == 'created' and direction_to_sort_on == 'down' %} <i class="fas fa-chevron-down"></i>
+    {% endif %}
+    </a></th>
+    <th><a href="{% url 'order:list'%}?field=order_status&direction={% if field_to_sort_on == 'order_status' and direction_to_sort_on == 'up'  %}down{% else %}up{% endif %}">Статус
+    {% if field_to_sort_on == 'order_status' and direction_to_sort_on == 'up' %} <i class="fas fa-chevron-up"></i>
+    {% elif field_to_sort_on == 'order_status' and direction_to_sort_on == 'down' %} <i class="fas fa-chevron-down"></i>
+    {% endif %}
+    </a></th>
+    <th><a href="{% url 'order:list'%}?field=address&direction={% if field_to_sort_on == 'address' and direction_to_sort_on == 'up'  %}down{% else %}up{% endif %}">Адрес
+    {% if field_to_sort_on == 'address' and direction_to_sort_on == 'up' %} <i class="fas fa-chevron-up"></i>
+    {% elif field_to_sort_on == 'address' and direction_to_sort_on == 'down' %} <i class="fas fa-chevron-down"></i>
+    {% endif %}
+    </a></th>
+    <th>Книги</th>
+    <th>Итого,<br>руб.</th>
+</tr>
+    {% for order in order_list %}
+    <tr>
+        <td><a href = "{% url 'order:update'  order.pk  %}">{{order.pk}}</a></td>
+        <td>{{order.created}}</td>
+        <td>{{order.order_status}}</td>
+        <td>{{order.address}}</td>
+        <td>{% for book in order.cart.books.all %}{{book.book.name}} x{{book.quantity}}<br>{% endfor %}</td>
+        <td>{{order.cart.total_summ}}</td>
+    </tr>
+        {% endfor %}
+</table>
+{% endblock main_content  %}

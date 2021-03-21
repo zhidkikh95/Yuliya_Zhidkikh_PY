@@ -35,7 +35,12 @@
     }
     #card-body{
     position:relative;
-    height:165px;
+    height:185px;
+    }
+    a {
+    color: $gray-900;
+    hover:  $gray-900;
+    class: text-body;
     }
     #book-name{
     height:70px;
@@ -51,8 +56,23 @@
     i {
     font-size: 20px;
     }
+
+    #i-cart-list {
+    font-size: 25px;
+    }
     .fas {
     font-size: 12px; 
+    }
+    .fa-star {
+    color: gold;
+    font-size: 12px; 
+    }
+    .fa-check-circle{
+    color: #77c346;
+    font-size: 80px; 
+    }
+    .table-success{
+    background-color: #cae8b6;
     }
     table.table.table-borderless:{
     padding: 1rem
@@ -74,7 +94,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #007474;">
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
@@ -87,10 +107,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'cart:add-to-cart' %}?book={{book.pk}}">Корзина<span class="sr-only">(current)</span></a>
       </li>
-
+      {% if user.is_staff %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'order:list' %}">Заказы<span class="sr-only">(current)</span></a>
+      </li>
+      {% endif %}
       {% if user.is_staff %}
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Словари</a>
+        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown01"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Словари</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="{% url 'author-list' %}"> Авторы</a>
           <a class="dropdown-item"  href="{% url 'genre-list' %}">Жанры</a>
@@ -102,8 +126,14 @@
     </ul>
     <ul class="navbar-nav col-auto">
     {% if user.is_authenticated %}
-      <li class="nav-item active">
-        <a class="nav-link" href=" {% url 'user-profile' user.pk %}">{{user}}<span class="sr-only">(current)</span></a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user}}</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{% url 'user-update' user.pk %}">Мой профиль</a>
+          <a class="dropdown-item" href="{% url 'user-profile-update'%}">Контактная информация</a>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item" href="{% url 'order:history' %}">История заказов</a>
+        </div>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'logout' %}">Выйти<span class="sr-only">(current)</span></a>
@@ -112,6 +142,9 @@
     {% if user.is_anonymous %}
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'login' %}">Войти<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'register' %}">Регистрация<span class="sr-only">(current)</span></a>
       </li>
     {% endif %}
     </ul>

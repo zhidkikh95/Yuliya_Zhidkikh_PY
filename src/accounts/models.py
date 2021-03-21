@@ -6,5 +6,5 @@ class Profile(models.Model):
     telephone = models.CharField("Номер телефона", max_length=100)
     address = models.TextField("Адрес")
     
-# Create your models here.
+
 
