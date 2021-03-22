@@ -5,7 +5,7 @@
 <div> <h1><span class="align-middle"><i class="fad fa-check-circle"></i></span> Спасибо за заказ!</h1>
 Ваш заказ принят оператором. Мы свяжемся с Вами в ближайшее время.<br><br>
 
-Статус заказа можно отслеживать <a href="{% url 'order:detail' object.pk %}">здесь</a>.
+{% if user.is_authenticated %}<p>Статус заказа можно отслеживать <a href="{% url 'order:detail' object.pk %}">здесь.</p></a>{% endif %}
 
 </div>
 

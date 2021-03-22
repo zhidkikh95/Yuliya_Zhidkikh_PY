@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView, DeleteView, CreateView, U
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
+from django.db.models import Q
 from books import models
 from . import forms
 
@@ -56,7 +57,7 @@ class AuthorList( ListView):
         query = self.request.GET.get('query')
         query_set = super().get_queryset()
         if query:
-           query_set = query_set.filter(surname__icontains=query) 
+           query_set = query_set.filter(Q(surname__icontains=query)|Q(name__icontains=query)) 
         return query_set
 
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
