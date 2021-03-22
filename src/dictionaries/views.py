@@ -4,6 +4,7 @@ from django.views.generic import DetailView, ListView, DeleteView, CreateView, U
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
+from books import models
 from . import forms
 
 def home_page(request):
@@ -12,10 +13,18 @@ def home_page(request):
 class AuthorDetail(DetailView):
     model=Author
 
-class AuthorList(PermissionRequiredMixin, ListView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_author = self.object
+        current_author_books = models.Book.objects.filter(author = current_author)
+        context["current_author_books"] = current_author_books
+        return context
+    
+
+class AuthorList( ListView):
     model=Author
-    login_url=reverse_lazy('login')
-    permission_required = ("dictionaries.view_author", "dictionaries.delete_author", "dictionaries.add_author", "dictionaries.change_author")
+    # login_url=reverse_lazy('login')
+    # permission_required = ("dictionaries.view_author", "dictionaries.delete_author", "dictionaries.add_author", "dictionaries.change_author")
     paginate_by = 10
 
     def get_context_data(self, **kwargs):

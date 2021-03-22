@@ -59,7 +59,7 @@
             {% else %}
             {% endif %}            
             </a></th>
-            <th width=15%>Действия</th>
+            {% if user.is_staff %}<th width=15%>Действия</th>{% endif %}
         </tr>
         {% for author in object_list %}
         <tr>
@@ -67,7 +67,7 @@
             <td><a href="{% url 'author-details' author.pk %}">{{author.surname}} {{author.name}} {{author.patronymic|default:""}}</a></td>
             <td>{{author.birthdate|default:""}}</td>
             <td>{{author.country|default:""}}</td>
-            <td><pre><a href="{% url 'author-delete' author.pk %}"><i class="fa fa-trash" aria-hidden="true"></i></a> <a href="{% url 'author-update' author.pk %}"><i class="fa fa-pencil" aria-hidden="true"></pre></i></a></td>    
+            {% if user.is_staff %}<td><pre><a href="{% url 'author-delete' author.pk %}"><i class="fa fa-trash" aria-hidden="true"></i></a> <a href="{% url 'author-update' author.pk %}"><i class="fa fa-pencil" aria-hidden="true"></pre></i></a></td> {% endif %}   
         </tr>
         {% endfor %}
     </table>

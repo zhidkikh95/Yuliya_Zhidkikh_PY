@@ -38,11 +38,11 @@ class UpdateCart(DetailView):
                 price = price,
                 defaults = {'quantity': 1}
             )
+            price = book_in_cart.price
             book_in_cart.save()
             if not book_created:
                 book_in_cart.quantity += 1
                 book_in_cart.save()
-        print(current_cart)
         return current_cart
 
 class ReсalculateCart(RedirectView):

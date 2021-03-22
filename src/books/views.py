@@ -5,6 +5,7 @@ from books.models import Book
 from dictionaries.models import Author
 from django.views.generic import DetailView, ListView, DeleteView, CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.db.models import Q
 from django.urls import  reverse_lazy
 from . import forms
 
@@ -14,8 +15,8 @@ class BookList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        authors=Author.objects.all().order_by('pk')
-        authors=authors.reverse()[:5]
+        # authors=Author.objects.all().order_by('pk')
+        # authors=authors.reverse()[:5]
         field_to_sort_on=self.request.GET.get('field')
         direction_to_sort_on=self.request.GET.get('direction')
         query = self.request.GET.get('query')
@@ -43,7 +44,10 @@ class BookList(ListView):
         query = self.request.GET.get('query')
         query_set = super().get_queryset()
         if query:
-           query_set = query_set.filter(name__icontains=query) 
+            author = Author.objects.all()
+            # authorname= author.filter
+            query_set = query_set.filter(name__icontains=query) 
+            # query_set = query_set.filter(Q(name__icontains=query)| Q(author__icontains=query)) 
         return query_set
     
 

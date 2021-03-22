@@ -20,5 +20,34 @@
             <td>{{object.biography|default:""}}</td>
         </tr>
         </table>
-   {% if user.is_staff %}<p align=center><a href="{% url 'author-list' %}" class="btn btn-info" >К спику авторов</a></p>{% endif %} 
+    <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
+        {% for book in current_author_books %}
+        <div class="col">
+          <div class="card shadow-sm h-100" >
+            <a href="{% url 'book-details' book.pk %}"><img class="card-img-top" src="{{book.book_picture.url}}" alt="{{book.name}}" height="280px"></a>
+            <div id='card-body' class="card-body" >
+              <div id='book-name' ><a class="link-success text-body " href="{% url 'book-details' book.pk %}">{{book.name}}</a></div>
+              <div class="card-text" >{{book.price}} руб.</div>
+              {% if book.rate == 5  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> {% endif %}
+              {% if book.rate == 4  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
+              {% if book.rate == 3  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
+              {% if book.rate == 2  %}<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i>{% endif %}
+              {% if book.rate == 1  %}<i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
+              <div>
+                <div id='btn-group' class="btn-group">
+                  <a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i id='cart' class="fas fa-shopping-cart"></i></a>
+                  {% if user.is_staff %}
+                  <a href="{% url 'book-update' book.pk %}" class="btn btn-sm btn-outline-secondary"><i id='pencil' class="fa fa-pencil" aria-hidden="true"></i></a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>          
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+  </div>
 {% endblock main_content  %}

@@ -20,7 +20,7 @@
               {% if book.rate == 1  %}<i class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i><i id='star-grey' class="fa fa-star" aria-hidden="true"></i> {% endif %}
               <div>
                 <div id='btn-group' class="btn-group">
-                  <a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i id='cart' class="fas fa-shopping-cart"></i></a>
+                  {% if book.is_available == 'Да' and book.available_number > 0 %}<a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}" class="btn btn-sm btn-outline-secondary"><i id='cart' class="fas fa-shopping-cart"></i></a>{% endif %}
                   {% if user.is_staff %}
                   <a href="{% url 'book-update' book.pk %}" class="btn btn-sm btn-outline-secondary"><i id='pencil' class="fa fa-pencil" aria-hidden="true"></i></a>
                   {% endif %}

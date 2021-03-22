@@ -62,14 +62,14 @@ class OrderConfirm(UpdateView):
 class UserOrder(ListView):
     model = models.Order
     template_name = 'orders/order_user_history.html'
-    paginate_by = 5
-    
+    # paginate_by = 5
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        current_customer = self.request.user 
-        customer_carts = cart_models.Cart.objects.filter(customer = current_customer)
-        user_orders = models.Order.objects.filter(cart__in = customer_carts)
-        context["user_orders"] = user_orders
+        # current_customer = self.request.user 
+        # customer_carts = cart_models.Cart.objects.filter(customer = current_customer)
+        # user_orders = models.Order.objects.filter(cart__in = customer_carts)
+        # context["user_orders"] = user_orders
         field_to_sort_on = self.request.GET.get('field')
         direction_to_sort_on = self.request.GET.get('direction')
         context["field_to_sort_on"] = field_to_sort_on
@@ -81,14 +81,22 @@ class UserOrder(ListView):
                 'field': field_to_sort_on,      
                 'direction': direction_to_sort_on
             })
+        print(field_to_sort_on, direction_to_sort_on)
         return context
 
     def get_queryset(self):
+        current_customer = self.request.user 
+        customer_carts = cart_models.Cart.objects.filter(customer = current_customer)
+        user_orders = models.Order.objects.filter(cart__in = customer_carts)
+        query_set = user_orders
         query = self.request.GET.get('query')
-        query_set = super().get_queryset()
         if query:
-           query_set = query_set.filter(created__icontains=query) 
+            query_set = query_set.filter(pk__icontains=query)
         return query_set
+    
+
+
+
     
 class OrderList(PermissionRequiredMixin, ListView):
     queryset = models.Order.objects.all().order_by('pk')
@@ -125,7 +133,7 @@ class OrderList(PermissionRequiredMixin, ListView):
         query = self.request.GET.get('query')
         query_set = super().get_queryset()
         if query:
-           query_set = query_set.filter(address__icontains=query) 
+            query_set = query_set.filter(address__icontains=query) 
         return query_set
 
 class OrderUpdate(PermissionRequiredMixin, UpdateView):

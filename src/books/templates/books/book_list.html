@@ -95,7 +95,7 @@
             <td>{{book.published_year}}</td>
             <td>{{book.publisher}}</td>
             <td>{% if book.rate %}{{book.rate}} <i class="fa fa-star" aria-hidden="true"></i>{% endif %}</td>            
-            <td align=center><a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}"><i id='i-cart-list' class="fas fa-shopping-cart"></i></a></td>
+            <td align=center>{% if book.is_available == 'Да' and book.available_number > 0 %}<a href="{% url 'cart:add-to-cart' %}?book={{book.pk}}"><i id='i-cart-list' class="fas fa-shopping-cart"></i></a>{% else %}{% endif %}</td>
         </tr>
         {% endfor %}
     </table>
