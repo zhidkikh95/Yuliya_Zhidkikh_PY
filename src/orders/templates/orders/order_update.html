@@ -4,7 +4,7 @@
 {% block main_content %}
     <h1>Редактирование заказа</h1>
     <h5>{{cart.customer.first_name}}</h5>
-    {% for book in cart.books.all %}{{book.book.name}} {{book.book.price}} руб. x{{book.quantity}}<br>{% endfor %}
+    {% for book in cart.books.all %}{{book.book.name}} {{book.price}} руб. x{{book.quantity}}<br>{% endfor %}
     </p>   
     <h6>Итого: {{cart.total_summ}} руб. </h6>  
     <form method="POST">
