@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block title%} Информация об авторе {% endblock title %}
 {% block main_content %}
-    <h1>{{object.surname}} {{object.name}} {{object.patronymic|default:""}}</h1>
-    <table width=70% class="table table-striped">
+<div class="row alert alert-warning">  
+<div class='col col-10'><h2>{{object.surname}} {{object.name}} {{object.patronymic|default:""}}</h2></div>
+<div class='col col-2' ><a href="{% url 'author-list' %}" class="link-success text-info"><p>к списку авторов <i class="fas fa-angle-double-right"></i></p></a></div>
+ </div>
+    <table width=70% class="table">
         {% if  user.is_staff %}<tr >
             <th width=10% align=left>#</th>
             <td>{{object.pk}}</td>
@@ -20,6 +23,7 @@
             <td>{{object.biography|default:""}}</td>
         </tr>
         </table>
+        <h6 class="alert alert-warning">Книги автора</h6>
     <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">

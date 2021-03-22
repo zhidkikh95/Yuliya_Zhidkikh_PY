@@ -136,7 +136,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user}}</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="{% url 'user-update' user.pk %}">Мой профиль</a>
+          <a class="dropdown-item" href="{% url 'user-update' %}">Мой профиль</a>
           <a class="dropdown-item" href="{% url 'user-profile-update'%}">Контактная информация</a>
           <hr class="dropdown-divider">
           <a class="dropdown-item" href="{% url 'order:history' %}">История заказов</a>

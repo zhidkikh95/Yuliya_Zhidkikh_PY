@@ -5,7 +5,7 @@
 
 {% block main_content %}
   
-  <h1>Список жанров:</h1>
+  <h2 class="alert alert-warning">Жанры</h2>
     <form action="" method="GET">
     {{search_form|crispy}}
     </form>
@@ -26,7 +26,7 @@
             {% endif %}
         </span>
     </div>
-    <table class="table table-striped" width=70%>
+    <table class="table table-hover" width=70%>
         <tr>
             <th width=5%><a href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}"> # 
             {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}

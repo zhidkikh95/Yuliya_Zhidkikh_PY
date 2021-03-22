@@ -62,7 +62,7 @@
 </tr>
     {% for order in object_list %}
     <tr>
-        <td><a href = "{% url 'order:update'  order.pk  %}">{{order.pk}}</a></td>
+        <td><a href = "{% url 'order:detail'  order.pk  %}">{{order.pk}}</a></td>
         <td>{{order.created}}</td>
         <td>{{order.order_status}}</td>
         <td>{{order.address}}</td>
