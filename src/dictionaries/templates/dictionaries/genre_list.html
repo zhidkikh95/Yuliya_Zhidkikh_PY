@@ -28,14 +28,14 @@
     </div>
     <table class="table table-hover" width=70%>
         <tr>
-            <th width=5%><a href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}"> # 
+            <th width=5%><a class="link-success text-body" href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}"> # 
             {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'pk' and direction_to_sort_on == 'down'%}
             <i class="fas fa-chevron-down"></i>
             {% endif %}
             </a></th>
-            <th><a href="?field=genre_name&direction={% if field_to_sort_on == 'genre_name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Жанр
+            <th><a class="link-success text-body"  href="?field=genre_name&direction={% if field_to_sort_on == 'genre_name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Жанр
             {% if field_to_sort_on == 'genre_name' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'genre_name' and direction_to_sort_on == 'down'%}

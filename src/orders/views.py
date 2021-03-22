@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import UpdateView, ListView, DetailView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
+from django.db.models import Q
 from carts import models as cart_models
 from accounts import models as account_models
 from django.contrib.auth.models import User
@@ -62,7 +63,7 @@ class OrderConfirm(UpdateView):
 class UserOrder(ListView):
     model = models.Order
     template_name = 'orders/order_user_history.html'
-    # paginate_by = 5
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -133,7 +134,9 @@ class OrderList(PermissionRequiredMixin, ListView):
         query = self.request.GET.get('query')
         query_set = super().get_queryset()
         if query:
-            query_set = query_set.filter(address__icontains=query) 
+            # query_set = query_set.filter(address__icontains=query) 
+            query_set = query_set.filter(Q(address__icontains=query)|Q(pk__icontains=query)) 
+
         return query_set
 
 class OrderUpdate(PermissionRequiredMixin, UpdateView):

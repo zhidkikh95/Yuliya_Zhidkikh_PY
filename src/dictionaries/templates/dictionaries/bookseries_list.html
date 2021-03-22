@@ -28,7 +28,7 @@
     </div>
     <table class="table table-hover" width=70%>
         <tr>
-            <th width=5%><a href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">#
+            <th width=5%><a class="link-success text-body" href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">#
             {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'pk' and direction_to_sort_on == 'down' %}
@@ -37,7 +37,7 @@
             {% endif %}
             </a></th>
 
-            <th><a href="?field=series_name&direction={% if field_to_sort_on == 'series_name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Серия книг
+            <th><a class="link-success text-body"  href="?field=series_name&direction={% if field_to_sort_on == 'series_name' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Серия книг
             {% if field_to_sort_on == 'series_name' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'series_name' and direction_to_sort_on == 'down' %}

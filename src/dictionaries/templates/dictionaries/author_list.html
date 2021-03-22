@@ -3,11 +3,11 @@
 {% block title%} Список авторов {% endblock title %}
 
 {% block main_content %}
-  
   <h2 class="alert alert-warning">Авторы</h2>
       <form action="" method="GET">
     {{search_form|crispy}}
     </form>
+
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
@@ -27,7 +27,7 @@
     </div>
     <table class="table table-hover" width=70%>
         <tr>
-            <th width=5%><a href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}"> # 
+            <th width=5%><a class="link-success text-body"  href="?field=pk&direction={% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}"> # 
             {% if field_to_sort_on == 'pk' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'pk' and direction_to_sort_on == 'down' %}
@@ -35,7 +35,7 @@
             {% else %}
             {% endif %}
             </a></th>
-            <th><a href="?field=surname&direction={% if field_to_sort_on == 'surname' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">ФИО
+            <th><a class="link-success text-body"  href="?field=surname&direction={% if field_to_sort_on == 'surname' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">ФИО
             {% if field_to_sort_on == 'surname' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'surname' and direction_to_sort_on == 'down' %}
@@ -43,7 +43,7 @@
             {% else %}
             {% endif %}
             </a></th>
-            <th width=20%><a href="?field=birthdate&direction={% if field_to_sort_on == 'birthdate' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Дата рождения
+            <th width=20%><a class="link-success text-body" href="?field=birthdate&direction={% if field_to_sort_on == 'birthdate' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Дата рождения
             {% if field_to_sort_on == 'birthdate' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'birthdate' and direction_to_sort_on == 'down' %}
@@ -51,7 +51,7 @@
             {% else %}
             {% endif %}
             </a></th>
-            <th width=20%><a href="?field=country&direction={% if field_to_sort_on == 'country' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Страна
+            <th width=20%><a class="link-success text-body" href="?field=country&direction={% if field_to_sort_on == 'country' and direction_to_sort_on == 'up' %}down{% else %}up{% endif %}">Страна
             {% if field_to_sort_on == 'country' and direction_to_sort_on == 'up' %}
             <i class="fas fa-chevron-up"></i>
             {% elif field_to_sort_on == 'country' and direction_to_sort_on == 'down' %}
@@ -59,7 +59,7 @@
             {% else %}
             {% endif %}            
             </a></th>
-            {% if user.is_staff %}<th width=15%>Действия</th>{% endif %}
+            {% if user.is_staff %}<th width=15%>Действия </th>{% endif %}
         </tr>
         {% for author in object_list %}
         <tr>
